@@ -5,6 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
 
+
         while (true){
             System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
             char input = sc.next().charAt(0);
@@ -29,7 +30,7 @@ public class Main {
     }
 
     private static void exit() {
-        System.out.println("4. Sortir");
+        System.exit(0);
     }
 
     private static void settings() {
