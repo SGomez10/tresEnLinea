@@ -5,26 +5,42 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
 
-        while (1>0){
+        while (true){
             System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
             char input = sc.next().charAt(0);
             switch (input){
                 case '1':
-                    System.out.println("1. Nova partida");
+                    newGame();
                     break;
                 case '2':
-                    System.out.println("2. Carregar partida");
+                    loadGame();
                     break;
                 case '3':
-                    System.out.println("3. Configuració");
+                    settings();
                     break;
                 case '4':
-                    System.out.println("4. Sortir");
+                    exit();
                     break;
                 default:
                     break;
             }
             System.out.println();
         }
+    }
+
+    private static void exit() {
+        System.out.println("4. Sortir");
+    }
+
+    private static void settings() {
+        System.out.println("3. Configuració");
+    }
+
+    private static void loadGame() {
+        System.out.println("2. Carregar partida");
+    }
+
+    private static void newGame() {
+        System.out.println("1. Nova partida");
     }
 }
