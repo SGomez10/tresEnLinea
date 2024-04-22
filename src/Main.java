@@ -5,11 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
 
+        TUI tui = new TUI(sc);
 
         while (true){
-            System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
-            char input = sc.next().charAt(0);
-            switch (input){
+            tui.menuIniciUI();
+            tui.getInput();
+            switch (tui.input){
                 case '1':
                     newGame();
                     break;
