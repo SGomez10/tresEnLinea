@@ -6,10 +6,11 @@ public class TUI {
     Scanner sc;
     char input;
 
-    public void getInput(){
+    public void getInput() {
         input = sc.next().charAt(0);
     }
-    public void menuIniciUI(){
+
+    public void menuIniciUI() {
         System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
     }
 

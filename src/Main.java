@@ -7,19 +7,20 @@ public class Main {
 
         TUI tui = new TUI(sc);
 
+        menuPrincipal:
         while (true){
             tui.menuIniciUI();
             tui.getInput();
             switch (tui.input){
                 case '1':
                     newGame();
-                    break;
+                    break menuPrincipal;
                 case '2':
                     loadGame();
-                    break;
+                    break menuPrincipal;
                 case '3':
                     settings();
-                    break;
+                    break menuPrincipal;
                 case '4':
                     exit();
                     break;
