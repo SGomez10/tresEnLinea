@@ -1,7 +1,6 @@
-import java.util.Locale;
 import java.util.Scanner;
 
-public class TUI {
+public class TUI extends Main{
 
     Scanner sc;
     char input;
@@ -10,8 +9,22 @@ public class TUI {
         input = sc.next().charAt(0);
     }
 
-    public void menuIniciUI() {
+    public int mostrarMenu() {
         System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
+        getInput();
+        return input;
+    }
+
+    public void mostrarTaulell(){
+
+    }
+
+    public short recollirJugada(short torn, char[] taulell){
+        return 0;
+    }
+
+    public void fiDePartida(short guanyador){
+
     }
 
     public TUI(Scanner sc) {

@@ -9,41 +9,37 @@ public class Main {
 
         menuPrincipal:
         while (true){
-            tui.menuIniciUI();
-            tui.getInput();
-            switch (tui.input){
+            switch (tui.mostrarMenu()){
                 case '1':
-                    newGame();
+                    novaPartida();
                     break menuPrincipal;
                 case '2':
-                    loadGame();
+                    carregarPartida();
                     break menuPrincipal;
                 case '3':
-                    settings();
+                    configuracio();
                     break menuPrincipal;
                 case '4':
-                    exit();
-                    break;
+                    sortir();
                 default:
                     break;
             }
-            System.out.println();
         }
     }
 
-    private static void exit() {
+    protected static void sortir() {
         System.exit(0);
     }
 
-    private static void settings() {
+    protected static void configuracio() {
         System.out.println("3. Configuració");
     }
 
-    private static void loadGame() {
+    protected static void carregarPartida() {
         System.out.println("2. Carregar partida");
     }
 
-    private static void newGame() {
+    protected static void novaPartida() {
         System.out.println("1. Nova partida");
     }
 }
