@@ -6,12 +6,13 @@ public class Main {
         sc.useLocale(Locale.ENGLISH);
 
         TUI tui = new TUI(sc);
+        Joc joc = new Joc();
 
         menuPrincipal:
         while (true){
             switch (tui.mostrarMenu()){
                 case '1':
-                    novaPartida();
+                    novaPartida(joc);
                     break menuPrincipal;
                 case '2':
                     carregarPartida();
@@ -25,6 +26,8 @@ public class Main {
                     break;
             }
         }
+
+
     }
 
     protected static void sortir() {
@@ -39,7 +42,7 @@ public class Main {
         System.out.println("2. Carregar partida");
     }
 
-    protected static void novaPartida() {
-        System.out.println("1. Nova partida");
+    protected static void novaPartida(Joc joc) {
+        joc.novaPartida();
     }
 }
