@@ -13,7 +13,6 @@ public class TUI extends Main{
         System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
         getInput();
         return input;
-        ///aaaaaa
     }
 
     public void mostrarTaulell(char[][] taulell, short torn){
