@@ -5,7 +5,6 @@ public class Joc {
     char [][] taulell;
     short torn;
 
-
     public char[][] getTaulell() {
         return taulell;
     }
@@ -23,26 +22,11 @@ public class Joc {
 
     public void jugar(short fila, short columna ){
 
-        char[][] taullel =getTaulell();
-        short torn = getTorn();
+        char[][] taullel=getTaulell();
+        short torn=getTorn();
 
-        if(torn % 2!=0){
-            if(taullel[fila][columna]==' '){
-                taullel[fila][columna]='X';
-            }
-            else{
-                System.out.println("Aquesta casella ja està ocupada");
-            }
-        }
-        else{
-            if(taullel[fila][columna]==' '){
-                taullel[fila][columna]='O';
-            }
-            else{
-                System.out.println("Aquesta casella ja està ocupada");
-            }
-        }
-
+        if(torn % 2!=0) taullel[fila][columna]='X';
+        else taullel[fila][columna]='O';
     }
 
     public boolean jugadaGuanyadora(short fila, short columna){
@@ -50,5 +34,19 @@ public class Joc {
 
         return false;
     }
+
+    public boolean verificaJugada(short fila, short columna, char[][] taulell){
+
+        if (fila > (3-1)  || fila < 0 || columna > (3-1) || columna < 0){
+            return false;
+        }
+        else if (taulell[fila][columna]=='X' || taulell[fila][columna]=='O'){
+            return false;
+        }
+        else return true;
+
+    }
+
+
 
 }
