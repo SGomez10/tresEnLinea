@@ -26,8 +26,6 @@ public class Main {
                     break;
             }
         }
-
-
     }
 
     protected static void sortir() {
