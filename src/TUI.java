@@ -16,7 +16,7 @@ public class TUI extends Main{
     }
 
     public void mostrarTaulell(char[][] taulell, short torn){
-        System.out.println("Torn del jugador " + torn);
+        System.out.println("Torn " + torn);
         for (int fila = 0; fila < 3; fila++){
             for (int columna = 0; columna < 3; columna++){
                 System.out.print(taulell[fila][columna]);
@@ -30,10 +30,6 @@ public class TUI extends Main{
         short fila = sc.nextShort();
         System.out.println("Selecciona columna.");
         short columna = sc.nextShort();
-        if (fila > (3-1)  || fila < 0 || columna > (3-1) || columna < 0){
-            System.out.println("Numero fora de rang");
-            return recollirJugada();
-        }
         return new short [fila][columna];
     }
 
