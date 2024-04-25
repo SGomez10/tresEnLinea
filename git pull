@@ -1,0 +1,42 @@
+[33mcommit 3ecea99ff1b4acb00721f9869f53c3a9dd3d1b90[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: 21fa402 d115cc6
+Author: SGomez10 <sgomez@elpuig.xeill.net>
+Date:   Thu Apr 18 20:32:04 2024 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 21fa402e81dd9f2e96683a99b75669ab875347df[m
+Author: SGomez10 <sgomez@elpuig.xeill.net>
+Date:   Thu Apr 18 20:31:41 2024 +0200
+
+    Commit con la clase TUI
+
+[33mcommit d115cc689ec91e2f8ac6791ba5d4928fe4f1e6ad[m
+Author: aarriazu <aarriazu@elpuig.xeill.net>
+Date:   Thu Apr 18 20:21:00 2024 +0200
+
+    43.3: Extraer metodos del main
+
+[33mcommit 6b93944399f993e3c6df06cd648198ee1ea9adef[m
+Author: aarriazu <aarriazu@elpuig.xeill.net>
+Date:   Wed Apr 17 18:02:20 2024 +0200
+
+    Tarea 1: Cal crear un menú principal
+
+[33mcommit 2e289bd34f15bca8ce7e86a745af8facdd609bb6[m
+Author: SGomez10 <sgomez@elpuig.xeill.net>
+Date:   Wed Apr 17 17:20:16 2024 +0200
+
+    Primer commit
+
+[33mcommit f71a236cdfaba8155a035bffda7b905c75bd1f74[m
+Author: SGomez10 <sgomez@elpuig.xeill.net>
+Date:   Wed Apr 17 17:09:07 2024 +0200
+
+    First commit
+
+[33mcommit 90912f09d16fb9593d23b2171ac4a93ead0d7081[m
+Author: SGomez10 <sgomez@elpuig.xeill.net>
+Date:   Wed Apr 17 17:06:59 2024 +0200
+
+    First commit
