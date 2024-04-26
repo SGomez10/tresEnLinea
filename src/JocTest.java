@@ -42,6 +42,5 @@ class JocTest {
         joc.novaPartida();
         joc.verificaJugada((short)0,(short)0, joc.taulell);
 
-
     }
 }
