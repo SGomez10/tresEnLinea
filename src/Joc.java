@@ -1,3 +1,5 @@
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.Scanner;
 
 public class Joc {
@@ -10,7 +12,7 @@ public class Joc {
     }
 
     public short getTorn() {
-
+        this.torn=1;
         return torn;
     }
 
@@ -23,7 +25,7 @@ public class Joc {
     public void jugar(short fila, short columna ){
 
         char[][] taullel=getTaulell();
-        short torn=getTorn();
+        getTorn();
 
         if(torn % 2!=0) taullel[fila][columna]='X';
         else taullel[fila][columna]='O';
@@ -31,8 +33,8 @@ public class Joc {
 
     public boolean jugadaGuanyadora(short fila, short columna){
 
+       return false;
 
-        return false;
     }
 
     public boolean verificaJugada(short fila, short columna, char[][] taulell){
