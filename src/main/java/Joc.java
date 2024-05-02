@@ -7,14 +7,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class Joc {
 
     char [][] taulell;
-    short torn;
+    short torn = 1;
 
     public char[][] getTaulell() {
         return taulell;
     }
 
     public short getTorn() {
-        this.torn=1;
         return torn;
     }
 
@@ -24,16 +23,22 @@ public class Joc {
         return taulell;
     }
 
-    public void jugar(short fila, short columna ){
+    public void jugar(int fila, int columna ){
 
         char[][] taullel=getTaulell();
         getTorn();
 
-        if(torn % 2!=0) taullel[fila][columna]='X';
-        else taullel[fila][columna]='O';
+        if (taulell[fila][columna] == 0){
+            if(torn % 2!=0) taullel[fila][columna]='X';
+            else taullel[fila][columna]='O';
+        }
+
+        // añadir else
+
+        torn += 1;
     }
 
-    public boolean jugadaGuanyadora(short fila, short columna){
+    public boolean jugadaGuanyadora(int fila, int columna){
 
        return false;
 
