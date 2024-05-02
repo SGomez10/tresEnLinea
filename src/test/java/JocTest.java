@@ -75,4 +75,16 @@ class JocTest {
         joc.verificaJugada((short)0,(short)0, joc.taulell);
 
     }
+
+    @Test
+    void jugadaGuanyadora() {
+
+        Joc joc = new Joc();
+        joc.novaPartida();
+
+    }
+
+
+
+
 }

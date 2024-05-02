@@ -40,11 +40,55 @@ public class Joc {
 
     public boolean jugadaGuanyadora(int fila, int columna){
 
-       return false;
+        taulell = getTaulell();
+        if(victoriaHorizontal(taulell,fila) || victoriaVertical(taulell,columna) || victoriaDiagonalInferior(taulell)) return true;
+        else return false;
 
     }
 
-    public boolean verificaJugada(short fila, short columna, char[][] taulell){
+    private static boolean victoriaHorizontal(char[][] taulell, int fila){
+        int contadorH=0;
+
+        for(int c=0; c<3; c++){
+            if(taulell[fila][c]=='X'){
+                contadorH++;
+            }
+        }
+
+        if(contadorH==3) return true;
+        else return false;
+
+    }
+
+    private static boolean victoriaVertical(char[][] taulell, int columna){
+        int contadorV=0;
+
+        for(int f=0; f<3; f++){
+            if(taulell[f][columna]=='X'){
+                contadorV++;
+            }
+        }
+
+        if(contadorV==3) return true;
+        else return false;
+
+    }
+
+    private static boolean victoriaDiagonalInferior(char[][] taulell){
+
+        int contadorDiagInf=0;
+
+        for(int i=0; i<3; i++){
+            if(taulell[i][i]=='X'){
+                contadorDiagInf++;
+            }
+        }
+
+        if (contadorDiagInf==3) return true;
+        else return false;
+    }
+
+    public boolean verificaJugada(int fila, int columna, char[][] taulell){
 
         if (fila > (3-1)  || fila < 0 || columna > (3-1) || columna < 0){
             return false;
