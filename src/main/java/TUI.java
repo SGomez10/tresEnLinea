@@ -18,9 +18,9 @@ public class TUI extends Main{
 
     public void mostrarTaulell(char[][] taulell, int torn){
         System.out.println("Torn " + torn);
-        for (int fila = 0; fila < 3; fila++){
-            for (int columna = 0; columna < 3; columna++){
-                System.out.print(taulell[fila][columna]);
+        for (int fila = 0; fila < taulell.length; fila++){
+            for (int columna = 0; columna < taulell.length; columna++){
+                System.out.print(taulell[fila][columna] + " ");
             }
             System.out.println();
         }
