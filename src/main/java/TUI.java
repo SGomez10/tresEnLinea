@@ -51,6 +51,10 @@ public class TUI extends Main{
         }
     }
 
+    public void jugadaNoValida(){
+        System.out.println("Aquesta jugada no es válida, introdueix una posició dins del taulell");
+    }
+
     public TUI(Scanner sc) {
         this.sc = sc;
     }

@@ -30,11 +30,27 @@ public class Main {
         }
         while (partida){
             tui.mostrarTaulell(joc.taulell, joc.getTorn());
-            tui.recollirJugada();
-            int posicions[];
-            posicions = tui.recollirJugada();
-            joc.verificaJugada(posicions[0], posicions[1], joc.taulell);
+            int posicioGuanyadora[];
+            posicioGuanyadora = jugada(tui, joc);
+            /*
+            if (joc.jugadaGuanyadora(posicioGuanyadora[0], posicioGuanyadora[1])){
+                tui.fiDePar1tida(joc.getTorn());
+                partida = false;
+            */
+            System.out.println("Fila:" + posicioGuanyadora[0] + " Columna:" + posicioGuanyadora[1]);
+        }
+    }
 
+    public static int[] jugada(TUI tui, Joc joc){
+        int posicions[];
+        posicions = tui.recollirJugada();
+        if(joc.verificaJugada(posicions[0], posicions[1], joc.taulell)){
+            joc.jugar(posicions[0], posicions[1]);
+            return posicions;
+        }
+        else{
+            tui.jugadaNoValida();
+            return jugada(tui, joc);
         }
     }
 
