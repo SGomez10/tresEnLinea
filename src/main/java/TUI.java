@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 
 public class TUI extends Main{
 
@@ -15,7 +16,7 @@ public class TUI extends Main{
         return input;
     }
 
-    public void mostrarTaulell(char[][] taulell, short torn){
+    public void mostrarTaulell(char[][] taulell, int torn){
         System.out.println("Torn " + torn);
         for (int fila = 0; fila < 3; fila++){
             for (int columna = 0; columna < 3; columna++){
@@ -25,15 +26,17 @@ public class TUI extends Main{
         }
     }
 
-    public short[][] recollirJugada(){
+    public int[] recollirJugada(){
+        int posicions[];
+        posicions = new int[2];
         System.out.println("Selecciona fila.");
-        short fila = sc.nextShort();
+        posicions[0]= sc.nextInt();
         System.out.println("Selecciona columna.");
-        short columna = sc.nextShort();
-        return new short [fila][columna];
+        posicions[1] = sc.nextInt();
+        return posicions;
     }
 
-    public void fiDePartida(short guanyador){
+    public void fiDePartida(int guanyador){
         if (guanyador == 1){
             System.out.println("Ha guanyat el jugador 1");
         }

@@ -44,7 +44,7 @@ public class Joc {
 
     }
 
-    public boolean verificaJugada(short fila, short columna, char[][] taulell){
+    public boolean verificaJugada(int fila, int columna, char[][] taulell){
 
         if (fila > (3-1)  || fila < 0 || columna > (3-1) || columna < 0){
             return false;

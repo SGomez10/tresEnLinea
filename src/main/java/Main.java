@@ -7,12 +7,14 @@ public class Main {
 
         TUI tui = new TUI(sc);
         Joc joc = new Joc();
+        boolean partida = false;
 
         menuPrincipal:
         while (true){
             switch (tui.mostrarMenu()){
                 case '1':
                     novaPartida(joc);
+                    partida = true;
                     break menuPrincipal;
                 case '2':
                     carregarPartida();
@@ -25,6 +27,14 @@ public class Main {
                 default:
                     break;
             }
+        }
+        while (partida){
+            tui.mostrarTaulell(joc.taulell, joc.getTorn());
+            tui.recollirJugada();
+            int posicions[];
+            posicions = tui.recollirJugada();
+            joc.verificaJugada(posicions[0], posicions[1], joc.taulell);
+
         }
     }
 
@@ -40,7 +50,5 @@ public class Main {
         System.out.println("2. Carregar partida");
     }
 
-    protected static void novaPartida(Joc joc) {
-        joc.novaPartida();
-    }
+    protected static void novaPartida(Joc joc) {joc.novaPartida();}
 }
