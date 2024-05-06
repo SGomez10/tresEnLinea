@@ -72,19 +72,35 @@ class JocTest {
     void verificaJugada() {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.verificaJugada((short)0,(short)0, joc.taulell);
+        joc.verificaJugada(0,0, joc.taulell);
 
     }
-
-    @Test
-    void jugadaGuanyadora() {
-
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_buit(int fila, int columna) {
         Joc joc = new Joc();
         joc.novaPartida();
-
+        Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
     }
 
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_1(int fila, int columna) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.taulell[1][1] = 'X';
+        Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
+    }
 
-
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_2(int fila, int columna) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.taulell[1][1] = 'X';
+        joc.taulell[1][0] = 'X';
+        if (joc.taulell[1][2] == 'X') Assertions.assertTrue(joc.jugadaGuanyadora(fila, columna));
+        else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
+    }
 
 }

@@ -73,6 +73,21 @@ public class Joc {
         else return false;
 
     }
+    private static boolean victoriaDiagonalSuperior(char[][] tablero){
+
+        int contadorDiaSup=0;
+
+        for(int fila=0; fila<tablero.length; fila++){
+            for (int columna=tablero.length-1; columna>0; columna--){
+                if(tablero[fila][columna]=='x'){
+                    contadorDiaSup++;
+                }
+            }
+        }
+
+        if(contadorDiaSup==3) return true;
+        else return false;
+    }
 
     private static boolean victoriaDiagonalInferior(char[][] taulell){
 
