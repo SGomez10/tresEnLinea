@@ -103,4 +103,7 @@ class JocTest {
         else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
     }
 
+    @Test
+    void
+
 }

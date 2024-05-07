@@ -1,12 +1,6 @@
-import jdk.jshell.spi.ExecutionControl;
-
-import java.util.Scanner;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
 public class Joc {
 
-    char [][] taulell;
+    char[][] taulell;
     short torn = 1;
 
     public char[][] getTaulell() {
@@ -17,20 +11,20 @@ public class Joc {
         return torn;
     }
 
-    public char[][] novaPartida(){
+    public char[][] novaPartida() {
 
         taulell = new char[3][3];
         return taulell;
     }
 
-    public void jugar(int fila, int columna ){
+    public void jugar(int fila, int columna) {
 
-        char[][] taullel=getTaulell();
+        char[][] taullel = getTaulell();
         getTorn();
 
-        if (taulell[fila][columna] == 0){
-            if(torn % 2!=0) taullel[fila][columna]='X';
-            else taullel[fila][columna]='O';
+        if (taulell[fila][columna] == 0) {
+            if (torn % 2 != 0) taullel[fila][columna] = 'X';
+            else taullel[fila][columna] = 'O';
         }
 
         // añadir else
@@ -38,83 +32,102 @@ public class Joc {
         torn += 1;
     }
 
-    public boolean jugadaGuanyadora(int fila, int columna){
+    public boolean jugadaGuanyadora(int fila, int columna) {
 
         taulell = getTaulell();
-        if(victoriaHorizontal(taulell,fila) || victoriaVertical(taulell,columna) || victoriaDiagonalInferior(taulell)) return true;
+        if (victoriaHorizontal(taulell, fila) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna, torn))
+            return true;
         else return false;
 
     }
 
-    private static boolean victoriaHorizontal(char[][] taulell, int fila){
-        int contadorH=0;
+    private static boolean victoriaHorizontal(char[][] taulell, int fila) {
+        int contadorH = 0;
 
-        for(int c=0; c<3; c++){
-            if(taulell[fila][c]=='X'){
+        for (int c = 0; c < 3; c++) {
+            if (taulell[fila][c] == 'X') {
                 contadorH++;
             }
-        }
-
-        if(contadorH==3) return true;
-        else return false;
-
-    }
-
-    private static boolean victoriaVertical(char[][] taulell, int columna){
-        int contadorV=0;
-
-        for(int f=0; f<3; f++){
-            if(taulell[f][columna]=='X'){
-                contadorV++;
+            else{
+                break;
             }
         }
 
-        if(contadorV==3) return true;
+        if (contadorH == 3) return true;
         else return false;
 
     }
-    private static boolean victoriaDiagonalSuperior(char[][] tablero){
 
-        int contadorDiaSup=0;
+    private static boolean victoriaVertical(char[][] taulell, int columna, int torn) {
+        int contadorV = 0;
+        char simbol;
 
-        for(int fila=0; fila<tablero.length; fila++){
-            for (int columna=tablero.length-1; columna>0; columna--){
-                if(tablero[fila][columna]=='x'){
+        if (torn % 2 != 0) simbol = 'X';
+        else simbol = 'O';
+
+        for (int f = 0; f < 3; f++) {
+            if (taulell[f][columna] == simbol) {
+                contadorV++;
+            }
+            else{
+                break;
+            }
+        }
+
+        if (contadorV == 3) return true;
+        else return false;
+
+    }
+
+    private static boolean victoriaDiagonalSuperior(char[][] tablero) {
+
+        int contadorDiaSup = 0;
+
+        for (int fila = 0; fila < tablero.length; fila++) {
+            for (int columna = tablero.length - 1; columna >= 0; columna--) {
+                if (tablero[fila][columna] == 'x') {
                     contadorDiaSup++;
+                    break;
                 }
             }
         }
 
-        if(contadorDiaSup==3) return true;
+        if (contadorDiaSup == 3) return true;
         else return false;
     }
 
-    private static boolean victoriaDiagonalInferior(char[][] taulell){
+    private static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna, int torn) {
 
-        int contadorDiagInf=0;
+        int contadorDiagInf = 0;
+        char simbol;
 
-        for(int i=0; i<3; i++){
-            if(taulell[i][i]=='X'){
-                contadorDiagInf++;
-            }
+        if (torn % 2 != 0) simbol = 'X';
+        else simbol = 'O';
+
+        for (int i=fila; i<taulell.length-1; i++){
+           if(taulell[fila][columna]==simbol){
+               contadorDiagInf++;
+           }
+           else{
+               break;
+           }
+           columna++;
+           if( columna>taulell.length-1) break;
         }
 
-        if (contadorDiagInf==3) return true;
+        if (contadorDiagInf == 3) return true;
         else return false;
     }
 
-    public boolean verificaJugada(int fila, int columna, char[][] taulell){
+    public boolean verificaJugada(int fila, int columna, char[][] taulell) {
 
-        if (fila > (3-1)  || fila < 0 || columna > (3-1) || columna < 0){
+        if (fila > (3 - 1) || fila < 0 || columna > (3 - 1) || columna < 0) {
             return false;
-        }
-        else if (taulell[fila][columna]=='X' || taulell[fila][columna]=='O'){
+        } else if (taulell[fila][columna] == 'X' || taulell[fila][columna] == 'O') {
             return false;
-        }
-        else return true;
+        } else return true;
 
     }
-
 
 
 }
