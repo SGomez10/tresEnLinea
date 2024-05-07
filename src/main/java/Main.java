@@ -1,34 +1,27 @@
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
+import java.io.File;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
 
+        File resources = new File("resources");
+        if (resources.mkdir()) {
+            System.out.println("Directori creat: " + resources.getName());
+        }
+        File savedgames = new File("resources/savedgames");
+        if (savedgames.mkdir()) {
+            System.out.println("Directori creat: " + savedgames.getName());
+        }
+
         TUI tui = new TUI(sc);
         Joc joc = new Joc();
-        boolean partida = false;
 
-        menuPrincipal:
-        while (true){
-            switch (tui.mostrarMenu()){
-                case '1':
-                    novaPartida(joc);
-                    partida = true;
-                    break menuPrincipal;
-                case '2':
-                    carregarPartida();
-                    break menuPrincipal;
-                case '3':
-                    configuracio();
-                    break menuPrincipal;
-                case '4':
-                    sortir();
-                default:
-                    break;
-            }
-        }
-        while (partida){
+        boolean partida = menuPrincipal(tui, joc);
+        while (partida) {
             tui.mostrarTaulell(joc.taulell, joc.getTorn());
             int posicioGuanyadora[];
             posicioGuanyadora = jugada(tui, joc);
@@ -41,16 +34,38 @@ public class Main {
         }
     }
 
-    public static int[] jugada(TUI tui, Joc joc){
+    public static int[] jugada(TUI tui, Joc joc) throws IOException {
         int posicions[];
         posicions = tui.recollirJugada();
-        if(joc.verificaJugada(posicions[0], posicions[1], joc.taulell)){
+        if (joc.verificaJugada(posicions[0], posicions[1], joc.taulell) == 2) {
             joc.jugar(posicions[0], posicions[1]);
             return posicions;
-        }
-        else{
+        } else if (joc.verificaJugada(posicions[0], posicions[1], joc.taulell) == 0) {
+            joc.guardarPartida(tui.guardarPartidaText());
+            return posicions;
+        } else {
             tui.jugadaNoValida();
             return jugada(tui, joc);
+        }
+    }
+
+    public static boolean menuPrincipal(TUI tui, Joc joc) {
+        while (true) {
+            switch (tui.mostrarMenu()) {
+                case '1':
+                    novaPartida(joc);
+                    return true;
+                case '2':
+                    carregarPartida();
+                    return true;
+                case '3':
+                    configuracio();
+                    return false;
+                case '4':
+                    sortir();
+                default:
+                    break;
+            }
         }
     }
 
@@ -66,5 +81,7 @@ public class Main {
         System.out.println("2. Carregar partida");
     }
 
-    protected static void novaPartida(Joc joc) {joc.novaPartida();}
+    protected static void novaPartida(Joc joc) {
+        joc.novaPartida();
+    }
 }
