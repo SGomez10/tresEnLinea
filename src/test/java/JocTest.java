@@ -10,7 +10,7 @@ class JocTest {
 
         Joc joc = new Joc();
         joc.novaPartida();
-        char[][] taullelMètode = joc.taulell;
+        char[][] taullelMètode = joc.getTaulell();
         char[][] taullelDeTesting= new char[3][3];
         Assertions.assertArrayEquals(taullelDeTesting,taullelMètode);
     }
@@ -20,10 +20,10 @@ class JocTest {
 
         Joc joc = new Joc();
         joc.novaPartida();
-        char[][] taullelMètode = joc.taulell;
+        char[][] taullelMètode = joc.getTaulell();
         char[][] taullelDeTesting= new char[3][3];
-        short turnoTesting= 1;
-        short turnoMetodo = joc.getTorn();
+        int turnoTesting= 1;
+        int turnoMetodo = joc.getTorn();
         Assertions.assertArrayEquals(taullelDeTesting,taullelMètode);
         Assertions.assertEquals(turnoTesting,turnoMetodo);
     }
@@ -34,7 +34,7 @@ class JocTest {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(fila, columna);
-        Assertions.assertEquals('X', joc.taulell[fila][columna]);
+        Assertions.assertEquals('X', joc.getPosicio(fila, columna));
     }
 
     @ParameterizedTest
@@ -42,9 +42,9 @@ class JocTest {
     void jugar_segona(int fila, int columna) {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.torn = 2;
+        joc.setTorn(2);
         joc.jugar(fila, columna);
-        Assertions.assertEquals('O', joc.taulell[fila][columna]);
+        Assertions.assertEquals('O', joc.getPosicio(fila, columna));
     }
 
     @ParameterizedTest
@@ -54,7 +54,7 @@ class JocTest {
         joc.novaPartida();
         joc.jugar(fila, columna);
         joc.jugar(fila, columna);
-        Assertions.assertEquals('X', joc.taulell[fila][columna]);
+        Assertions.assertEquals('X', joc.getPosicio(fila, columna));
     }
 
     @ParameterizedTest
@@ -62,17 +62,17 @@ class JocTest {
     void jugar_tercera_bloquejada(int fila, int columna) {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.torn = 2;
+        joc.setTorn(2);
         joc.jugar(fila, columna);
         joc.jugar(fila, columna);
-        Assertions.assertEquals('O', joc.taulell[fila][columna]);
+        Assertions.assertEquals('O', joc.getPosicio(fila, columna));
     }
 
     @Test
     void verificaJugada() {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.verificaJugada((short)0,(short)0, joc.taulell);
+        joc.verificaJugada((short)0,(short)0, joc.getTaulell());
 
     }
 }
