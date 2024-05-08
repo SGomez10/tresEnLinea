@@ -103,7 +103,15 @@ class JocTest {
         else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
     }
 
-    @Test
-    void
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_diagonal(int fila, int columna) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.taulell[1][1] = 'X';
+        joc.taulell[1][0] = 'X';
+        if (joc.taulell[1][2] == 'X') Assertions.assertTrue(joc.jugadaGuanyadora(fila, columna));
+        else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
+    }
 
 }

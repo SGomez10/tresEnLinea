@@ -49,7 +49,7 @@ public class Joc {
                 contadorH++;
             }
             else{
-                break;
+                contadorH=0;
             }
         }
 
@@ -70,7 +70,7 @@ public class Joc {
                 contadorV++;
             }
             else{
-                break;
+                contadorV=0;
             }
         }
 
@@ -79,18 +79,14 @@ public class Joc {
 
     }
 
-    private static boolean victoriaDiagonalSuperior(char[][] tablero) {
+    private static boolean victoriaDiagonalSuperior(char[][] tablero, int fila, int columna) {
 
         int contadorDiaSup = 0;
 
-        for (int fila = 0; fila < tablero.length; fila++) {
-            for (int columna = tablero.length - 1; columna >= 0; columna--) {
-                if (tablero[fila][columna] == 'x') {
-                    contadorDiaSup++;
-                    break;
-                }
-            }
+        for(int f=0; f>tablero.length; f++){
+
         }
+
 
         if (contadorDiaSup == 3) return true;
         else return false;
@@ -129,5 +125,30 @@ public class Joc {
 
     }
 
+    public boolean victoriaDiagonal(char[][]taulell, int fila, int columna, int torn){
+
+        char simbol;
+        int contadorDiag=0;
+
+        if(torn%2!=0) simbol ='X';
+        else simbol='O';
+
+        if( fila<0 || columna<0 || fila>=taulell.length || columna>=taulell.length) return false;
+        else{
+                boolean arribaDer=victoriaDiagonal(taulell,fila-1,columna+1,torn);
+                boolean abajoDer=victoriaDiagonal(taulell,fila+1,columna+1,torn);
+                boolean arribaIzq=victoriaDiagonal(taulell,fila-1,columna-1,torn);
+                boolean abajoIzq=victoriaDiagonal(taulell,fila+1,columna-1,torn);
+
+                boolean esSimbol= (arribaDer || abajoDer || arribaIzq || abajoIzq);
+
+                if(esSimbol){
+                    contadorDiag++;
+                }
+
+                if(contadorDiag==3) return true;
+                else return false;
+        }
+    }
 
 }
