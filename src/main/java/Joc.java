@@ -35,7 +35,7 @@ public class Joc {
     public boolean jugadaGuanyadora(int fila, int columna) {
 
         taulell = getTaulell();
-        if (victoriaHorizontal(taulell, fila, torn) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna, torn) || victoriaDiagonalSuperior(taulell,fila,columna))
+        if (victoriaHorizontal(taulell, fila, torn) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna) || victoriaDiagonalSuperior(taulell,fila,columna))
             return true;
         else return false;
 
@@ -97,7 +97,6 @@ public class Joc {
             }
         }
 
-
         //Bucle que mira la diagonal secundaria desde la posición seleccionada hacia arriba a la derecha
         for (int i = 1; fila-i >= 0 && columna+i < taulell.length; i++){
             if(taulell[fila][columna] == taulell[fila-i][columna+i]){
@@ -112,13 +111,9 @@ public class Joc {
         else return false;
     }
 
-    public static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna, int torn) {
+    public static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna) {
 
         int contadorDiagInf = 1;
-        char simbol;
-
-        if (torn % 2 != 0) simbol = 'X';
-        else simbol = 'O';
 
         for (int i = 1; fila+i <taulell.length && columna+i <taulell.length; i++){
             if(taulell[fila][columna] == taulell[fila+i][columna+i]){

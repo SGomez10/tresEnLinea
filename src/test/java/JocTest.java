@@ -140,20 +140,32 @@ class JocTest {
     void victoriaHorizontal() {
         Joc joc = new Joc();
         joc.novaPartida();
-        char[][] taullelEjemplo={{'X','_','X',},{'O','X','O'},{'X','O','O'}};
+        char[][] taullelEjemplo={{'X','X','X',},{'O','X','O'},{'X','O','O'}};
         Assertions.assertTrue(joc.victoriaHorizontal(taullelEjemplo,0,1));
 
     }
 
     @Test
     void victoriaVertical() {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        char[][] taullelEjemplo={{'X','X','O',},{'O','X','O'},{'X','X','_'}};
+        Assertions.assertTrue(joc.victoriaVertical(taullelEjemplo,1,1));
     }
 
     @Test
     void victoriaDiagonalSuperior() {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        char[][] taullelEjemplo={{'X','O','X',},{'O','X','O'},{'X','O','_'}};
+        Assertions.assertTrue(joc.victoriaDiagonalSuperior(taullelEjemplo,1,1));
     }
 
     @Test
     void victoriaDiagonalInferior() {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        char[][] taullelEjemplo={{'X','_','X',},{'O','X','O'},{'X','X','_'}};
+        Assertions.assertTrue(joc.victoriaDiagonalInferior(taullelEjemplo,1,1));
     }
 }
