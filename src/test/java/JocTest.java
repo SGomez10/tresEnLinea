@@ -105,7 +105,7 @@ class JocTest {
 
     @ParameterizedTest
     @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
-    void jugada_guanyadora_diagonal(int fila, int columna) {
+    void jugada_guanyadora_horizontal(int fila, int columna) {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.taulell[1][1] = 'X';
@@ -114,4 +114,46 @@ class JocTest {
         else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
     }
 
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_diagonal(int fila, int columna) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.taulell[0][2] = 'X';
+        joc.taulell[1][1] = 'X';
+        if (joc.taulell[2][0] == 'X') Assertions.assertTrue(joc.jugadaGuanyadora(fila, columna));
+        else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,0", "0,1", "0,2", "1,0", "1,1", "1,2", "2,0", "2,1", "2,2"})
+    void jugada_guanyadora_vertical(int fila, int columna) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.taulell[0][1] = 'X';
+        joc.taulell[1][1] = 'X';
+        if (joc.taulell[2][1] == 'X') Assertions.assertTrue(joc.jugadaGuanyadora(fila, columna));
+        else Assertions.assertFalse(joc.jugadaGuanyadora(fila, columna));
+    }
+
+    @Test
+    void victoriaHorizontal() {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        char[][] taullelEjemplo={{'X','_','X',},{'O','X','O'},{'X','O','O'}};
+        Assertions.assertTrue(joc.victoriaHorizontal(taullelEjemplo,0,1));
+
+    }
+
+    @Test
+    void victoriaVertical() {
+    }
+
+    @Test
+    void victoriaDiagonalSuperior() {
+    }
+
+    @Test
+    void victoriaDiagonalInferior() {
+    }
 }

@@ -35,17 +35,22 @@ public class Joc {
     public boolean jugadaGuanyadora(int fila, int columna) {
 
         taulell = getTaulell();
-        if (victoriaHorizontal(taulell, fila) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna, torn))
+        if (victoriaHorizontal(taulell, fila, torn) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna, torn) || victoriaDiagonalSuperior(taulell,fila,columna))
             return true;
         else return false;
 
     }
 
-    private static boolean victoriaHorizontal(char[][] taulell, int fila) {
-        int contadorH = 0;
+    public boolean victoriaHorizontal(char[][] taulell, int fila, int torn) {
 
-        for (int c = 0; c < 3; c++) {
-            if (taulell[fila][c] == 'X') {
+        int contadorH = 0;
+        char simbol;
+
+        if (torn % 2 != 0) simbol = 'X';
+        else simbol = 'O';
+
+        for (int c = 0; c < taulell.length; c++) {
+            if (taulell[fila][c] == simbol) {
                 contadorH++;
             }
             else{
@@ -58,14 +63,14 @@ public class Joc {
 
     }
 
-    private static boolean victoriaVertical(char[][] taulell, int columna, int torn) {
+    public static boolean victoriaVertical(char[][] taulell, int columna, int torn) {
         int contadorV = 0;
         char simbol;
 
         if (torn % 2 != 0) simbol = 'X';
         else simbol = 'O';
 
-        for (int f = 0; f < 3; f++) {
+        for (int f = 0; f < taulell.length; f++) {
             if (taulell[f][columna] == simbol) {
                 contadorV++;
             }
@@ -79,36 +84,58 @@ public class Joc {
 
     }
 
-    private static boolean victoriaDiagonalSuperior(char[][] tablero, int fila, int columna) {
+    public static boolean victoriaDiagonalSuperior(char[][] taulell, int fila, int columna) {
 
         int contadorDiaSup = 0;
 
-        for(int f=0; f>tablero.length; f++){
-
+        for(int i=1; fila+i< taulell.length && columna-i>=0; i++){
+            if(taulell[fila][columna]==taulell[fila+i][columna-i]){
+                contadorDiaSup++;
+            }
+            else{
+                break;
+            }
         }
 
+
+        //Bucle que mira la diagonal secundaria desde la posición seleccionada hacia arriba a la derecha
+        for (int i = 1; fila-i >= 0 && columna+i < taulell.length; i++){
+            if(taulell[fila][columna] == taulell[fila-i][columna+i]){
+                contadorDiaSup++;
+            }
+            else{
+                break;
+            }
+        }
 
         if (contadorDiaSup == 3) return true;
         else return false;
     }
 
-    private static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna, int torn) {
+    public static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna, int torn) {
 
-        int contadorDiagInf = 0;
+        int contadorDiagInf = 1;
         char simbol;
 
         if (torn % 2 != 0) simbol = 'X';
         else simbol = 'O';
 
-        for (int i=fila; i<taulell.length-1; i++){
-           if(taulell[fila][columna]==simbol){
-               contadorDiagInf++;
-           }
-           else{
-               break;
-           }
-           columna++;
-           if( columna>taulell.length-1) break;
+        for (int i = 1; fila+i <taulell.length && columna+i <taulell.length; i++){
+            if(taulell[fila][columna] == taulell[fila+i][columna+i]){
+                contadorDiagInf++;
+            }
+            else{
+                break;
+            }
+        }
+
+        for (int i = 1; fila-i >= 0 && columna-i >= 0; i++){
+            if(taulell[fila][columna] == taulell[fila-i][columna-i]){
+                contadorDiagInf++;
+            }
+            else {
+                break;
+            }
         }
 
         if (contadorDiagInf == 3) return true;
@@ -125,30 +152,5 @@ public class Joc {
 
     }
 
-    public boolean victoriaDiagonal(char[][]taulell, int fila, int columna, int torn){
-
-        char simbol;
-        int contadorDiag=0;
-
-        if(torn%2!=0) simbol ='X';
-        else simbol='O';
-
-        if( fila<0 || columna<0 || fila>=taulell.length || columna>=taulell.length) return false;
-        else{
-                boolean arribaDer=victoriaDiagonal(taulell,fila-1,columna+1,torn);
-                boolean abajoDer=victoriaDiagonal(taulell,fila+1,columna+1,torn);
-                boolean arribaIzq=victoriaDiagonal(taulell,fila-1,columna-1,torn);
-                boolean abajoIzq=victoriaDiagonal(taulell,fila+1,columna-1,torn);
-
-                boolean esSimbol= (arribaDer || abajoDer || arribaIzq || abajoIzq);
-
-                if(esSimbol){
-                    contadorDiag++;
-                }
-
-                if(contadorDiag==3) return true;
-                else return false;
-        }
-    }
 
 }
