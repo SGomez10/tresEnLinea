@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class Main {
         TUI tui = new TUI(sc);
         Joc joc = new Joc();
         boolean partida = false;
+
         while (!partida){
             partida = menuPrincipal(tui, joc);
             while (partida) {
@@ -56,17 +58,17 @@ public class Main {
         }
     }
 
-    public static boolean menuPrincipal(TUI tui, Joc joc) {
+    public static boolean menuPrincipal(TUI tui, Joc joc) throws FileNotFoundException {
         while (true) {
             switch (tui.mostrarMenu()) {
                 case '1':
                     novaPartida(joc);
                     return true;
                 case '2':
-                    carregarPartida();
-                    return true;
+                    carregarPartida(tui, joc);
+                    return false;
                 case '3':
-                    configuracio();
+                    configuracio(tui, joc);
                     return false;
                 case '4':
                     sortir();
@@ -80,12 +82,27 @@ public class Main {
         System.exit(0);
     }
 
-    protected static void configuracio() {
-        System.out.println("3. Configuració");
+    protected static void configuracio(TUI tui, Joc joc) {
+        configuracio:
+        while (true) {
+            switch (tui.mostrarMenuConfig()) {
+                case '1':
+                    // metodo de cambiar configracion
+                    break;
+                case '2':
+                    break configuracio;
+                default:
+                    break;
+            }
+        }
     }
 
-    protected static void carregarPartida() {
-        System.out.println("2. Carregar partida");
+    protected static void carregarPartida(TUI tui, Joc joc) throws FileNotFoundException {
+        File file = joc.carregarPartidaFile(tui.carregarPartidaText());
+        tui.carregarPartidaTorn(file);
+        tui.carregarPartidaTaulell(file);
+        char[][] taulell = new char[3][3];
+
     }
 
     protected static void novaPartida(Joc joc) {

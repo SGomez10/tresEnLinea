@@ -41,6 +41,12 @@ public class Joc {
         return taulell;
     }
 
+    public File carregarPartidaFile(String string) {return new File("resources/savedgames/" + string + ".txt");}
+
+    public char[][] carregarPartida (int torn, char[][] taulell){
+        return null;
+    }
+
     public void jugar(int fila, int columna) {
 
         char[][] taullel = getTaulell();
@@ -74,7 +80,7 @@ public class Joc {
         File partidaguardada = new File("resources/savedgames/" + string + ".txt");
         if (partidaguardada.createNewFile()) {
             FileWriter text = new FileWriter("resources/savedgames/" + string + ".txt");   //filewrter crea el archicvo si no existe, modificar esto
-            text.write(String.valueOf(torn));
+            text.write(String.valueOf(torn) + " " + tamany + " ");
             for (int fila = 0; fila < taulell.length; fila++) {
                 for (int columna = 0; columna < taulell.length; columna++) {
                     text.write(taulell[fila][columna]);

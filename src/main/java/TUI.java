@@ -1,4 +1,6 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.File;
 
 public class TUI extends Main {
 
@@ -17,6 +19,11 @@ public class TUI extends Main {
         return getCharInput();
     }
 
+    public int mostrarMenuConfig() {
+        System.out.println("1. Cambiar mida del taulell\n2. Enrere");
+        return getCharInput();
+    }
+
     public void mostrarTaulell(char[][] taulell, int torn) {
         System.out.println("Torn " + torn);
         for (int fila = 0; fila < taulell.length; fila++) {
@@ -30,6 +37,32 @@ public class TUI extends Main {
     public String guardarPartidaText() {
         System.out.println("Introdueix el nom de la partida");
         return getStringInput();
+    }
+
+    public String carregarPartidaText() {
+        System.out.println("Escriu el nom de la partida que vols carregar");
+        return sc.next();
+    }
+
+    public int carregarPartidaTorn(File file) throws FileNotFoundException {
+        Scanner fr = new Scanner(file);
+        int torn = Integer.parseInt(fr.next());
+        fr.close();
+        return torn;
+    }
+
+    public char[][] carregarPartidaTaulell(File file) throws FileNotFoundException {
+        Scanner fr = new Scanner(file);
+        fr.next();
+        int tamany = Integer.parseInt(fr.next());
+        char[][] taulell = new char[tamany][tamany];
+        for (int fila = 0; fila < taulell.length; fila++) {
+            for (int columna = 0; columna < taulell.length; columna++) {
+                //taulell[fila][columna] = sc.next();
+            }
+        }
+        fr.close();
+        return taulell;
     }
 
     public int[] recollirJugada() {
