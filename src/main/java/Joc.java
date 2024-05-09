@@ -83,7 +83,7 @@ public class Joc {
             text.write(String.valueOf(torn) + " " + tamany + " ");
             for (int fila = 0; fila < taulell.length; fila++) {
                 for (int columna = 0; columna < taulell.length; columna++) {
-                    text.write(taulell[fila][columna]);
+                    text.write(taulell[fila][columna] + " ");
                 }
             }
             text.close();

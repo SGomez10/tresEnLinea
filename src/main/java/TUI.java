@@ -58,7 +58,7 @@ public class TUI extends Main {
         char[][] taulell = new char[tamany][tamany];
         for (int fila = 0; fila < taulell.length; fila++) {
             for (int columna = 0; columna < taulell.length; columna++) {
-                //taulell[fila][columna] = sc.next();
+                taulell[fila][columna] = fr.next().charAt(0);
             }
         }
         fr.close();

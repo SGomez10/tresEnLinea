@@ -66,7 +66,7 @@ public class Main {
                     return true;
                 case '2':
                     carregarPartida(tui, joc);
-                    return false;
+                    return true;
                 case '3':
                     configuracio(tui, joc);
                     return false;
@@ -99,10 +99,7 @@ public class Main {
 
     protected static void carregarPartida(TUI tui, Joc joc) throws FileNotFoundException {
         File file = joc.carregarPartidaFile(tui.carregarPartidaText());
-        tui.carregarPartidaTorn(file);
-        tui.carregarPartidaTaulell(file);
-        char[][] taulell = new char[3][3];
-
+        tui.mostrarTaulell(tui.carregarPartidaTaulell(file), tui.carregarPartidaTorn(file));
     }
 
     protected static void novaPartida(Joc joc) {
