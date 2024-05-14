@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Joc {
 
     private char[][] taulell;
-    private int torn = 1;
+    private int torn;
     private int tamany = 3;
 
     public char[][] getTaulell() {
@@ -34,6 +34,7 @@ public class Joc {
 
     public char[][] novaPartida() {
 
+        torn = 1;
         taulell = new char[tamany][tamany];
         for (int fila = 0; fila < taulell.length; fila++) {
             for (int columna = 0; columna < taulell.length; columna++) {
@@ -60,40 +61,44 @@ public class Joc {
     }
 
     //esto va a haber que hacerlo de forma recursiva
-    public boolean jugadaGuanyadora(int fila, int columna, char[][] taulell, int caso) {
-        int contador = 1;
+    public boolean jugadaGuanyadora(int fila, int columna, int caso) {
+        int contador = 0;
+        char simbol;
+        if (torn % 2 == 0){ simbol = 'X';}
+        else{ simbol = 'O';}
+
         if (caso == 0) {
             //horizontal
-            for (int c = 0; c < taulell.length; c++) {
-                if (contador >= 3) {
-                    return true;
-                } else if (taulell[fila][c] == taulell[fila][columna]) {
+            for (int c = 0; c < taulell.length; c++){
+                if(taulell[fila][c] == simbol){
                     contador++;
-                } else {
-                    contador = 0;
+                    if (contador==3) break;
                 }
+                else contador = 0;
             }
+            if (contador >= 3) return true;
+            else return false;
         }
         else if (caso == 1) {
             //vertical
-            for (int f = 0; f < taulell.length; f++) {
-                if (contador >= 3) {
-                    return true;
-                } else if (taulell[f][columna] == taulell[fila][columna]) {
+            for (int f = 0; f < taulell.length; f++){
+                if(taulell[f][columna] == simbol){
                     contador++;
-                } else {
-                    contador = 0;
+                    if (contador==3) break;
                 }
+                else contador = 0;
             }
+            if (contador >= 3) return true;
+            else return false;
         }
         else if (caso == 2) {
             // diagonal 1
-            int c = taulell.length;
+            int c = taulell.length - 1;
             for (int f = 0; f < taulell.length; f++) {
-                c--;
                 if (contador >= 3) {
                     return true;
-                } else if (taulell[f][c] == taulell[fila][columna]) {
+                } else if (taulell[f][c] == simbol) {
+                    c--;
                     contador++;
                 } else {
                     contador = 0;
@@ -106,7 +111,7 @@ public class Joc {
             for (int f = 0; f < taulell.length; f++) {
                 if (contador >= 3) {
                     return true;
-                } else if (taulell[f][c] == taulell[fila][columna]) {
+                } else if (taulell[f][c] == simbol) {
                     contador++;
                 } else {
                     contador = 0;

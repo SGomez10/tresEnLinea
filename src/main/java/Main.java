@@ -26,17 +26,18 @@ public class Main {
         while (!partida){
             partida = menuPrincipal(tui, joc);
             while (partida) {
-                tui.mostrarTaulell(joc.getTaulell(), joc.getTorn());
+                tui.mostrarTorn(joc.getTorn());
+                tui.mostrarTaulell(joc.getTaulell());
                 int posicioActual[];
                 posicioActual = jugada(tui, joc);
                 if (posicioActual[0] == -1 && posicioActual[1] == -1){
                     partida = false;
                     break;
                 }
-                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 0) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 1) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 2) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 3)) {
+                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 0) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 1) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 2) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 3)) {
                     int guanyador = 3;
                     if (joc.getTorn() % 2 == 0){
                         guanyador = 1;
@@ -45,6 +46,7 @@ public class Main {
                         guanyador = 2;
                     }
                     tui.fiDePartida(guanyador);
+                    tui.mostrarTaulell(joc.getTaulell());
                     partida = false;
                 }
             }
