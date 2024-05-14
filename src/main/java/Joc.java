@@ -12,6 +12,8 @@ public class Joc {
         return taulell;
     }
 
+    public void setTaulell(char[][] taulell) { this.taulell = taulell;}
+
     public char getPosicio(int fila, int columna) { return taulell[fila][columna];}
 
     public int getTorn() {
@@ -43,10 +45,6 @@ public class Joc {
 
     public File carregarPartidaFile(String string) {return new File("resources/savedgames/" + string + ".txt");}
 
-    public char[][] carregarPartida (int torn, char[][] taulell){
-        return null;
-    }
-
     public void jugar(int fila, int columna) {
 
         char[][] taullel = getTaulell();
@@ -61,14 +59,68 @@ public class Joc {
         torn += 1;
     }
 
-    public boolean jugadaGuanyadora(int fila, int columna) {
-
+    //esto va a haber que hacerlo de forma recursiva
+    public boolean jugadaGuanyadora(int fila, int columna, char[][] taulell, int caso) {
+        int contador = 1;
+        if (caso == 0) {
+            //horizontal
+            for (int c = 0; c < taulell.length; c++) {
+                if (contador >= 3) {
+                    return true;
+                } else if (taulell[fila][c] == taulell[fila][columna]) {
+                    contador++;
+                } else {
+                    contador = 0;
+                }
+            }
+        }
+        else if (caso == 1) {
+            //vertical
+            for (int f = 0; f < taulell.length; f++) {
+                if (contador >= 3) {
+                    return true;
+                } else if (taulell[f][columna] == taulell[fila][columna]) {
+                    contador++;
+                } else {
+                    contador = 0;
+                }
+            }
+        }
+        else if (caso == 2) {
+            // diagonal 1
+            int c = taulell.length;
+            for (int f = 0; f < taulell.length; f++) {
+                c--;
+                if (contador >= 3) {
+                    return true;
+                } else if (taulell[f][c] == taulell[fila][columna]) {
+                    contador++;
+                } else {
+                    contador = 0;
+                }
+            }
+        }
+        else if (caso == 3) {
+            //diagonal 2
+            int c = 0;
+            for (int f = 0; f < taulell.length; f++) {
+                if (contador >= 3) {
+                    return true;
+                } else if (taulell[f][c] == taulell[fila][columna]) {
+                    contador++;
+                } else {
+                    contador = 0;
+                }
+                c++;
+            }
+        }
+        else{
+            return false;
+        }
         return false;
-
     }
 
     public int verificaJugada(int fila, int columna, char[][] taulell) {
-
         if (fila == -1 && columna == -1) {
             return 0;         // if de -1 -1 para guardar partida
         } else if (fila > (taulell.length - 1) || fila < 0 || columna > taulell.length - 1 || columna < 0 || taulell[fila][columna] == 'X' || taulell[fila][columna] == 'O') {
@@ -76,7 +128,7 @@ public class Joc {
         } else return 2;
     }
 
-    public void guardarPartida(String string, char[][] taulell, int torn) throws IOException {
+    public boolean guardarPartida(String string, char[][] taulell, int torn) throws IOException {
         File partidaguardada = new File("resources/savedgames/" + string + ".txt");
         if (partidaguardada.createNewFile()) {
             FileWriter text = new FileWriter("resources/savedgames/" + string + ".txt");   //filewrter crea el archicvo si no existe, modificar esto
@@ -87,10 +139,10 @@ public class Joc {
                 }
             }
             text.close();
-            System.out.println("Partida guardada: " + partidaguardada.getName()); //mover al tui
+            return true;
         }
         else{
-            System.out.println("Ya existe una partida con ese nombre");//mover al tui
+            return false;
         }
     }
 }

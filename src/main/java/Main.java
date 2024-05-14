@@ -27,18 +27,26 @@ public class Main {
             partida = menuPrincipal(tui, joc);
             while (partida) {
                 tui.mostrarTaulell(joc.getTaulell(), joc.getTorn());
-                int posicioGuanyadora[];
-                posicioGuanyadora = jugada(tui, joc);
-                if (posicioGuanyadora[0] == -1 && posicioGuanyadora[1] == -1){
+                int posicioActual[];
+                posicioActual = jugada(tui, joc);
+                if (posicioActual[0] == -1 && posicioActual[1] == -1){
                     partida = false;
                     break;
                 }
-            /*
-            if (joc.jugadaGuanyadora(posicioGuanyadora[0], posicioGuanyadora[1])){
-                tui.fiDePar1tida(joc.getTorn());
-                partida = false;
-            */
-                System.out.println("Fila:" + posicioGuanyadora[0] + " Columna:" + posicioGuanyadora[1]); // deberia ser tui
+                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 0) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 1) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 2) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], joc.getTaulell(), 3)) {
+                    int guanyador = 3;
+                    if (joc.getTorn() % 2 == 0){
+                        guanyador = 1;
+                    }
+                    else if (joc.getTorn() % 2 != 0){
+                        guanyador = 2;
+                    }
+                    tui.fiDePartida(guanyador);
+                    partida = false;
+                }
             }
         }
     }
@@ -50,11 +58,23 @@ public class Main {
             joc.jugar(posicions[0], posicions[1]);
             return posicions;
         } else if (joc.verificaJugada(posicions[0], posicions[1], joc.getTaulell()) == 0) {
-            joc.guardarPartida(tui.guardarPartidaText(), joc.getTaulell(), joc.getTorn());
+            guardarPartidaMain(tui, joc);
             return posicions;
         } else {
             tui.jugadaNoValida();
             return jugada(tui, joc);
+        }
+    }
+
+    public static boolean guardarPartidaMain(TUI tui, Joc joc) throws IOException {
+        if(joc.guardarPartida(tui.guardarPartidaText(), joc.getTaulell(), joc.getTorn()))
+        {
+            tui.guardarPartidaOk();
+            return true;
+        }
+        else{
+            tui.guardarPartidaError();
+            return guardarPartidaMain(tui, joc);
         }
     }
 
@@ -99,7 +119,8 @@ public class Main {
 
     protected static void carregarPartida(TUI tui, Joc joc) throws FileNotFoundException {
         File file = joc.carregarPartidaFile(tui.carregarPartidaText());
-        tui.mostrarTaulell(tui.carregarPartidaTaulell(file), tui.carregarPartidaTorn(file));
+        joc.setTaulell(tui.carregarPartidaTaulell(file));
+        joc.setTorn(tui.carregarPartidaTorn(file));
     }
 
     protected static void novaPartida(Joc joc) {

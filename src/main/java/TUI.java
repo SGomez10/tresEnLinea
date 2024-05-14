@@ -15,7 +15,7 @@ public class TUI extends Main {
     }
 
     public int mostrarMenu() {
-        System.out.println("1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
+        System.out.println("\n1. Nova partida\n2. Carregar partida\n3. Configuració\n4. Sortir");
         return getCharInput();
     }
 
@@ -37,6 +37,14 @@ public class TUI extends Main {
     public String guardarPartidaText() {
         System.out.println("Introdueix el nom de la partida");
         return getStringInput();
+    }
+
+    public void guardarPartidaOk() {
+        System.out.println("Partida guardada correctament");
+    }
+
+    public void guardarPartidaError() {
+        System.out.println("Ya existeix una partida amb aquest nom");
     }
 
     public String carregarPartidaText() {

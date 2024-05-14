@@ -9,9 +9,15 @@ class JocTest {
     void novaPartida_taulell() {
 
         Joc joc = new Joc();
+        joc.setTamany(3);
         joc.novaPartida();
         char[][] taullelMètode = joc.getTaulell();
-        char[][] taullelDeTesting= new char[3][3];
+        char[][] taullelDeTesting = new char[joc.getTamany()][joc.getTamany()];
+        for (int fila = 0; fila < taullelDeTesting.length; fila++) {
+            for (int columna = 0; columna < taullelDeTesting.length; columna++) {
+                taullelDeTesting[fila][columna] = '_';
+            }
+        }
         Assertions.assertArrayEquals(taullelDeTesting,taullelMètode);
     }
 
@@ -19,9 +25,15 @@ class JocTest {
     void novaPartida_jugador() {
 
         Joc joc = new Joc();
+        joc.setTamany(3);
         joc.novaPartida();
         char[][] taullelMètode = joc.getTaulell();
-        char[][] taullelDeTesting= new char[3][3];
+        char[][] taullelDeTesting= new char[joc.getTamany()][joc.getTamany()];
+        for (int fila = 0; fila < taullelDeTesting.length; fila++) {
+            for (int columna = 0; columna < taullelDeTesting.length; columna++) {
+                taullelDeTesting[fila][columna] = '_';
+            }
+        }
         int turnoTesting= 1;
         int turnoMetodo = joc.getTorn();
         Assertions.assertArrayEquals(taullelDeTesting,taullelMètode);
@@ -68,11 +80,147 @@ class JocTest {
         Assertions.assertEquals('O', joc.getPosicio(fila, columna));
     }
 
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraBuit(int caso) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        Assertions.assertFalse(joc.jugadaGuanyadora(0, 0, joc.getTaulell(), caso));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraHorizontal(int caso) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(0, 1);
+        joc.setTorn(5);
+        joc.jugar(0, 2);
+        if (caso ==  0){
+            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2, joc.getTaulell(), caso));
+        }
+        else{
+            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2, joc.getTaulell(), caso));
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraHorizontalMal(int caso) {
+        Joc joc = new Joc();
+        joc.setTamany(5);
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(0, 1);
+        joc.setTorn(5);
+        joc.jugar(0, 3);
+        Assertions.assertFalse(joc.jugadaGuanyadora(0, 3, joc.getTaulell(), caso));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraVertical(int caso) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(1, 0);
+        joc.setTorn(5);
+        joc.jugar(2, 0);
+        if (caso ==  1){
+            Assertions.assertTrue(joc.jugadaGuanyadora(2, 0, joc.getTaulell(), caso));
+        }
+        else{
+            Assertions.assertFalse(joc.jugadaGuanyadora(2, 0, joc.getTaulell(), caso));
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraVerticalMal(int caso) {
+        Joc joc = new Joc();
+        joc.setTamany(5);
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(1, 0);
+        joc.setTorn(5);
+        joc.jugar(3, 0);
+        Assertions.assertFalse(joc.jugadaGuanyadora(2, 0, joc.getTaulell(), caso));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraDiagonal1(int caso) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.jugar(2, 0);
+        joc.setTorn(3);
+        joc.jugar(1, 1);
+        joc.setTorn(5);
+        joc.jugar(0, 2);
+        if (caso ==  2){
+            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2, joc.getTaulell(), caso));
+        }
+        else{
+            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2, joc.getTaulell(), caso));
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraDiagonal1Mal(int caso) {
+        Joc joc = new Joc();
+        joc.setTamany(5);
+        joc.novaPartida();
+        joc.jugar(4, 0);
+        joc.setTorn(3);
+        joc.jugar(3, 1);
+        joc.setTorn(5);
+        joc.jugar(1, 3);
+        Assertions.assertFalse(joc.jugadaGuanyadora(1, 3, joc.getTaulell(), caso));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraDiagonal2(int caso) {
+        Joc joc = new Joc();
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(1, 1);
+        joc.setTorn(5);
+        joc.jugar(2, 2);
+        if (caso ==  3){
+            Assertions.assertTrue(joc.jugadaGuanyadora(2, 2, joc.getTaulell(), caso));
+        }
+        else{
+            Assertions.assertFalse(joc.jugadaGuanyadora(2, 2, joc.getTaulell(), caso));
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0", "1", "2", "3"})
+    void jugadaGuanyadoraDiagonal2Mal(int caso) {
+        Joc joc = new Joc();
+        joc.setTamany(5);
+        joc.novaPartida();
+        joc.jugar(0, 0);
+        joc.setTorn(3);
+        joc.jugar(1, 1);
+        joc.setTorn(5);
+        joc.jugar(3, 3);
+        Assertions.assertFalse(joc.jugadaGuanyadora(3, 3, joc.getTaulell(), caso));
+    }
+
     @Test
     void verificaJugada() {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.verificaJugada((short)0,(short)0, joc.getTaulell());
-
+        joc.verificaJugada(0,0, joc.getTaulell());
     }
 }
