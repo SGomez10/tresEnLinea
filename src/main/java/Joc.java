@@ -35,7 +35,7 @@ public class Joc {
     public boolean jugadaGuanyadora(int fila, int columna) {
 
         taulell = getTaulell();
-        if (victoriaHorizontal(taulell, fila, torn) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna) || victoriaDiagonalSuperior(taulell,fila,columna))
+        if (victoriaHorizontal(taulell, fila, torn) || victoriaVertical(taulell, columna, torn) || victoriaDiagonalInferior(taulell, fila, columna,torn) || victoriaDiagonalSuperior(taulell,fila,columna,torn))
             return true;
         else return false;
 
@@ -52,13 +52,15 @@ public class Joc {
         for (int c = 0; c < taulell.length; c++) {
             if (taulell[fila][c] == simbol) {
                 contadorH++;
+                if (contadorH==3) break;
+
             }
             else{
                 contadorH=0;
             }
         }
 
-        if (contadorH == 3) return true;
+        if (contadorH >= 3) return true;
         else return false;
 
     }
@@ -73,6 +75,7 @@ public class Joc {
         for (int f = 0; f < taulell.length; f++) {
             if (taulell[f][columna] == simbol) {
                 contadorV++;
+                if (contadorV==3) break;
             }
             else{
                 contadorV=0;
@@ -84,53 +87,57 @@ public class Joc {
 
     }
 
-    public static boolean victoriaDiagonalSuperior(char[][] taulell, int fila, int columna) {
+    public static boolean victoriaDiagonalSuperior(char[][] taulell, int fila, int columna, int torn) {
 
         int contadorDiaSup = 0;
+        char simbol;
 
-        for(int i=1; fila+i< taulell.length && columna-i>=0; i++){
-            if(taulell[fila][columna]==taulell[fila+i][columna-i]){
+        if(torn%2 !=0) simbol='X';
+        else simbol='O';
+
+        int filaIn= fila - Math.min(fila,columna);
+        int colIn= columna - Math.min(fila,columna);
+
+        while (filaIn<taulell.length && colIn<taulell.length){
+
+            if(taulell[filaIn][colIn]==simbol){
                 contadorDiaSup++;
+                if(contadorDiaSup==3) break;
+
             }
-            else{
-                break;
-            }
+            else contadorDiaSup=0;
+
+            filaIn++;
+            colIn++;
         }
 
-        //Bucle que mira la diagonal secundaria desde la posición seleccionada hacia arriba a la derecha
-        for (int i = 1; fila-i >= 0 && columna+i < taulell.length; i++){
-            if(taulell[fila][columna] == taulell[fila-i][columna+i]){
-                contadorDiaSup++;
-            }
-            else{
-                break;
-            }
-        }
 
-        if (contadorDiaSup == 3) return true;
+        if(contadorDiaSup==3) return true;
         else return false;
+
     }
 
-    public static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna) {
+    public static boolean victoriaDiagonalInferior(char[][] taulell, int fila, int columna, int torn) {
 
-        int contadorDiagInf = 1;
+        int contadorDiagInf = 0;
+        char simbol;
 
-        for (int i = 1; fila+i <taulell.length && columna+i <taulell.length; i++){
-            if(taulell[fila][columna] == taulell[fila+i][columna+i]){
+        if(torn%2!=0) simbol='X';
+        else simbol='O';
+
+        int filaIn= fila - Math.min(fila,taulell.length-1-columna);
+        int colIn =  columna + Math.min(fila,taulell.length-1-columna);
+
+        while( filaIn<taulell.length && colIn>=0){
+
+            if(taulell[filaIn][colIn]==simbol){
                 contadorDiagInf++;
+                if(contadorDiagInf==3) break;
             }
-            else{
-                break;
-            }
-        }
+            else contadorDiagInf=0;
 
-        for (int i = 1; fila-i >= 0 && columna-i >= 0; i++){
-            if(taulell[fila][columna] == taulell[fila-i][columna-i]){
-                contadorDiagInf++;
-            }
-            else {
-                break;
-            }
+            filaIn++;
+            colIn--;
         }
 
         if (contadorDiagInf == 3) return true;
