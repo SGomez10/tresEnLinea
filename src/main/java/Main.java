@@ -34,10 +34,10 @@ public class Main {
                     partida = false;
                     break;
                 }
-                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 0) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 1) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 2) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1], 3)) {
+                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
+                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1])) {
                     int guanyador = 3;
                     if (joc.getTorn() % 2 == 0){
                         guanyador = 1;
@@ -56,20 +56,20 @@ public class Main {
     public static int[] jugada(TUI tui, Joc joc) throws IOException {
         int posicions[];
         posicions = tui.recollirJugada();
-        if (joc.verificaJugada(posicions[0], posicions[1], joc.getTaulell()) == 2) {
+        if (joc.verificaJugada(posicions[0], posicions[1])) {
             joc.jugar(posicions[0], posicions[1]);
             return posicions;
-        } else if (joc.verificaJugada(posicions[0], posicions[1], joc.getTaulell()) == 0) {
+        } /*else if (joc.verificaJugada(posicions[0], posicions[1]) == 0) {
             guardarPartidaMain(tui, joc);
             return posicions;
-        } else {
+        }*/ else {
             tui.jugadaNoValida();
             return jugada(tui, joc);
         }
     }
 
     public static boolean guardarPartidaMain(TUI tui, Joc joc) throws IOException {
-        if(joc.guardarPartida(tui.guardarPartidaText(), joc.getTaulell(), joc.getTorn()))
+        if(joc.guardarPartida(tui.guardarPartidaText(), joc.getTorn()))
         {
             tui.guardarPartidaOk();
             return true;
