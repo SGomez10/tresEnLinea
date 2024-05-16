@@ -34,10 +34,8 @@ public class Main {
                     partida = false;
                     break;
                 }
-                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
-                        joc.jugadaGuanyadora(posicioActual[0], posicioActual[1])) {
+
+                if (joc.jugadaGuanyadora(posicioActual[0], posicioActual[1])) {
                     int guanyador = 3;
                     if (joc.getTorn() % 2 == 0) {
                         guanyador = 1;
@@ -48,6 +46,7 @@ public class Main {
                     tui.mostrarTaulell(joc.getTaulell());
                     partida = false;
                 }
+                joc.incrementarTorn();
             }
         }
     }
@@ -57,7 +56,6 @@ public class Main {
         posicions = tui.recollirJugada();
         if (joc.verificaJugada(posicions[0], posicions[1]) == 2) {
             joc.jugar(posicions[0], posicions[1]);
-            joc.incrementarTorn();
             return posicions;
         }else if (joc.verificaJugada(posicions[0], posicions[1]) == 0) {
             guardarPartidaMain(tui, joc);

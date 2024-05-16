@@ -82,7 +82,7 @@ class JocTest {
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraBuit(int caso) {
+    void jugadaGuanyadoraBuit() {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(0, 0);
@@ -91,7 +91,7 @@ class JocTest {
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraHorizontal(int caso) {
+    void jugadaGuanyadoraHorizontal() {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(0, 0);
@@ -104,7 +104,7 @@ class JocTest {
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraHorizontalMal(int caso) {
+    void jugadaGuanyadoraHorizontalMal() {
         Joc joc = new Joc();
         joc.setTamany(5);
         joc.novaPartida();
@@ -113,12 +113,12 @@ class JocTest {
         joc.jugar(0, 1);
         joc.setTorn(5);
         joc.jugar(0, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(0, 3));
+        Assertions.assertFalse(joc.victoriaHorizontal(0));
     }
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraVertical(int caso) {
+    void jugadaGuanyadoraVertical() {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(0, 0);
@@ -131,7 +131,7 @@ class JocTest {
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraVerticalMal(int caso) {
+    void jugadaGuanyadoraVerticalMal() {
         Joc joc = new Joc();
         joc.setTamany(5);
         joc.novaPartida();
@@ -140,12 +140,12 @@ class JocTest {
         joc.jugar(1, 0);
         joc.setTorn(5);
         joc.jugar(3, 0);
-        Assertions.assertFalse(joc.jugadaGuanyadora(2, 0));
+        Assertions.assertFalse(joc.victoriaVertical(2));
     }
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraDiagonal1(int caso) {
+    void jugadaGuanyadoraDiagonalInferior() {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(2, 0);
@@ -153,12 +153,12 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(0, 2);
-        Assertions.assertTrue(joc.jugadaGuanyadora(0, 2));
+        Assertions.assertTrue(joc.victoriaDiagonalInferior(0, 2));
     }
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraDiagonal1Mal(int caso) {
+    void jugadaGuanyadoraDiagonalInferiorMal() {
         Joc joc = new Joc();
         joc.setTamany(5);
         joc.novaPartida();
@@ -167,12 +167,12 @@ class JocTest {
         joc.jugar(3, 1);
         joc.setTorn(5);
         joc.jugar(1, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(1, 3));
+        Assertions.assertFalse(joc.victoriaDiagonalInferior(1, 3));
     }
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraDiagonal2(int caso) {
+    void jugadaGuanyadoraDiagonalSuperior() {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(0, 0);
@@ -180,21 +180,12 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(2, 2);
-        Assertions.assertTrue(joc.jugadaGuanyadora(2, 2));
-        /*
-        if (caso ==  3){
-            Assertions.assertTrue(joc.jugadaGuanyadora(2, 2));
-        }
-        else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(2, 2));
-        }
-
-         */
+        Assertions.assertTrue(joc.victoriaDiagonalSuperior(2, 2));
     }
 
     @ParameterizedTest
     @CsvSource({"0", "1", "2", "3"})
-    void jugadaGuanyadoraDiagonal2Mal(int caso) {
+    void jugadaGuanyadoraDiagonal2Mal() {
         Joc joc = new Joc();
         joc.setTamany(5);
         joc.novaPartida();
@@ -203,7 +194,7 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(3, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(3, 3));
+        Assertions.assertFalse(joc.victoriaDiagonalInferior(3, 3));
     }
 
     @Test
