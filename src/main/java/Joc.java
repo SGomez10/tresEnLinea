@@ -54,9 +54,9 @@ public class Joc {
             if (torn % 2 != 0) taullel[fila][columna] = 'X';
             else taullel[fila][columna] = 'O';
         }
+    }
 
-        // añadir else
-
+    public void incrementarTorn() {
         torn += 1;
     }
 

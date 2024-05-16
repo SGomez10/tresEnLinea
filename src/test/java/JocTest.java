@@ -153,12 +153,7 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(0, 2);
-        if (caso ==  2){
-            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2));
-        }
-        else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2));
-        }
+        Assertions.assertTrue(joc.jugadaGuanyadora(0, 2));
     }
 
     @ParameterizedTest

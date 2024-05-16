@@ -57,6 +57,7 @@ public class Main {
         posicions = tui.recollirJugada();
         if (joc.verificaJugada(posicions[0], posicions[1]) == 2) {
             joc.jugar(posicions[0], posicions[1]);
+            joc.incrementarTorn();
             return posicions;
         }else if (joc.verificaJugada(posicions[0], posicions[1]) == 0) {
             guardarPartidaMain(tui, joc);
