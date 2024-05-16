@@ -30,7 +30,7 @@ public class Main {
                 tui.mostrarTaulell(joc.getTaulell());
                 int posicioActual[];
                 posicioActual = jugada(tui, joc);
-                if (posicioActual[0] == -1 && posicioActual[1] == -1){
+                if (posicioActual[0] == -1 && posicioActual[1] == -1) {
                     partida = false;
                     break;
                 }
@@ -39,10 +39,9 @@ public class Main {
                         joc.jugadaGuanyadora(posicioActual[0], posicioActual[1]) ||
                         joc.jugadaGuanyadora(posicioActual[0], posicioActual[1])) {
                     int guanyador = 3;
-                    if (joc.getTorn() % 2 == 0){
+                    if (joc.getTorn() % 2 == 0) {
                         guanyador = 1;
-                    }
-                    else if (joc.getTorn() % 2 != 0){
+                    } else if (joc.getTorn() % 2 != 0) {
                         guanyador = 2;
                     }
                     tui.fiDePartida(guanyador);
@@ -56,20 +55,20 @@ public class Main {
     public static int[] jugada(TUI tui, Joc joc) throws IOException {
         int posicions[];
         posicions = tui.recollirJugada();
-        if (joc.verificaJugada(posicions[0], posicions[1])) {
+        if (joc.verificaJugada(posicions[0], posicions[1]) == 2) {
             joc.jugar(posicions[0], posicions[1]);
             return posicions;
-        } /*else if (joc.verificaJugada(posicions[0], posicions[1]) == 0) {
+        }else if (joc.verificaJugada(posicions[0], posicions[1]) == 0) {
             guardarPartidaMain(tui, joc);
             return posicions;
-        }*/ else {
+        } else {
             tui.jugadaNoValida();
             return jugada(tui, joc);
         }
     }
 
     public static boolean guardarPartidaMain(TUI tui, Joc joc) throws IOException {
-        if(joc.guardarPartida(tui.guardarPartidaText(), joc.getTorn()))
+        if(joc.guardarPartida(tui.guardarPartidaText()))
         {
             tui.guardarPartidaOk();
             return true;

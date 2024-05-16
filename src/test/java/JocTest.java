@@ -86,7 +86,7 @@ class JocTest {
         Joc joc = new Joc();
         joc.novaPartida();
         joc.jugar(0, 0);
-        Assertions.assertFalse(joc.jugadaGuanyadora(0, 0, caso));
+        Assertions.assertFalse(joc.jugadaGuanyadora(0, 0));
     }
 
     @ParameterizedTest
@@ -99,12 +99,7 @@ class JocTest {
         joc.jugar(0, 1);
         joc.setTorn(5);
         joc.jugar(0, 2);
-        if (caso ==  0){
-            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2, caso));
-        }
-        else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2, caso));
-        }
+        Assertions.assertTrue(joc.victoriaHorizontal(0));
     }
 
     @ParameterizedTest
@@ -118,7 +113,7 @@ class JocTest {
         joc.jugar(0, 1);
         joc.setTorn(5);
         joc.jugar(0, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(0, 3, caso));
+        Assertions.assertFalse(joc.jugadaGuanyadora(0, 3));
     }
 
     @ParameterizedTest
@@ -131,12 +126,7 @@ class JocTest {
         joc.jugar(1, 0);
         joc.setTorn(5);
         joc.jugar(2, 0);
-        if (caso ==  1){
-            Assertions.assertTrue(joc.jugadaGuanyadora(2, 0, caso));
-        }
-        else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(2, 0, caso));
-        }
+        Assertions.assertTrue(joc.victoriaVertical(0));
     }
 
     @ParameterizedTest
@@ -150,7 +140,7 @@ class JocTest {
         joc.jugar(1, 0);
         joc.setTorn(5);
         joc.jugar(3, 0);
-        Assertions.assertFalse(joc.jugadaGuanyadora(2, 0, caso));
+        Assertions.assertFalse(joc.jugadaGuanyadora(2, 0));
     }
 
     @ParameterizedTest
@@ -164,10 +154,10 @@ class JocTest {
         joc.setTorn(5);
         joc.jugar(0, 2);
         if (caso ==  2){
-            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2, caso));
+            Assertions.assertTrue(joc.jugadaGuanyadora(0, 2));
         }
         else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2, caso));
+            Assertions.assertFalse(joc.jugadaGuanyadora(0, 2));
         }
     }
 
@@ -182,7 +172,7 @@ class JocTest {
         joc.jugar(3, 1);
         joc.setTorn(5);
         joc.jugar(1, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(1, 3, caso));
+        Assertions.assertFalse(joc.jugadaGuanyadora(1, 3));
     }
 
     @ParameterizedTest
@@ -195,12 +185,16 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(2, 2);
+        Assertions.assertTrue(joc.jugadaGuanyadora(2, 2));
+        /*
         if (caso ==  3){
-            Assertions.assertTrue(joc.jugadaGuanyadora(2, 2, caso));
+            Assertions.assertTrue(joc.jugadaGuanyadora(2, 2));
         }
         else{
-            Assertions.assertFalse(joc.jugadaGuanyadora(2, 2, caso));
+            Assertions.assertFalse(joc.jugadaGuanyadora(2, 2));
         }
+
+         */
     }
 
     @ParameterizedTest
@@ -214,13 +208,13 @@ class JocTest {
         joc.jugar(1, 1);
         joc.setTorn(5);
         joc.jugar(3, 3);
-        Assertions.assertFalse(joc.jugadaGuanyadora(3, 3, caso));
+        Assertions.assertFalse(joc.jugadaGuanyadora(3, 3));
     }
 
     @Test
     void verificaJugada() {
         Joc joc = new Joc();
         joc.novaPartida();
-        joc.verificaJugada(0,0, joc.getTaulell());
+        joc.verificaJugada(0,0);
     }
 }
