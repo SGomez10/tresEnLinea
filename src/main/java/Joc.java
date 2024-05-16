@@ -32,6 +32,19 @@ public class Joc {
         torn += 1;
     }
 
+    /**
+     * Aquest mètode s'encarrega de comprovar si en fer una jugada en qualsevol posició, el jugador que fa la jugada ha guanyat o no.
+     * Per a funcionar crida a altres quatre mètodes que comproven si hi ha un tres el línia de forma vertical, horitzontal, o qualsevol diagonal.
+     * En cas d'haver-ho, retorna un true
+     * @param fila
+     *        Fila de la posició on es fa la jugada a comprovar
+     *
+     * @param columna
+     *        Columna de la posició on es fa la jugada a comprovar
+     *
+     * @return
+     *       Retorna true si el jugador ha guanyat, i false si no es troba una jugada que permeti guanyar al jugador
+     */
     public boolean jugadaGuanyadora(int fila, int columna) {
 
         taulell = getTaulell();
