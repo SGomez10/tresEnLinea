@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -211,5 +212,16 @@ public class Joc {
         }
     }
 
+    public boolean guardarConfiguracio(Integer mida) throws IOException{
+        if(mida<=10 && mida>=3) {
+            FileWriter textconfig = new FileWriter("resources/config.txt");
+            textconfig.write(Integer.toString(mida));
+            textconfig.close();
+            return true;
+        } else{
+            return false;
+        }
+
+    }
 
 }

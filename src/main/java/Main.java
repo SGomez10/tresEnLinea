@@ -78,10 +78,11 @@ public class Main {
         }
     }
 
-    public static boolean menuPrincipal(TUI tui, Joc joc) throws FileNotFoundException {
+    public static boolean menuPrincipal(TUI tui, Joc joc) throws IOException {
         while (true) {
             switch (tui.mostrarMenu()) {
                 case '1':
+                    joc.setTamany(tui.carregarMida());
                     novaPartida(joc);
                     return true;
                 case '2':
@@ -102,18 +103,29 @@ public class Main {
         System.exit(0);
     }
 
-    protected static void configuracio(TUI tui, Joc joc) {
+    protected static void configuracio(TUI tui, Joc joc) throws IOException {
         configuracio:
         while (true) {
             switch (tui.mostrarMenuConfig()) {
                 case '1':
-                    // metodo de cambiar configracion
+                    guardarConfigMain(joc, tui);
                     break;
                 case '2':
                     break configuracio;
                 default:
                     break;
             }
+        }
+    }
+
+    protected static boolean guardarConfigMain(Joc joc, TUI tui) throws IOException {
+        if(joc.guardarConfiguracio(tui.guardarMidaTaullel())){
+            tui.guardarMidaOK();
+            return true;
+        }
+        else {
+            tui.guardarMidaError();
+            return guardarConfigMain(joc,tui);
         }
     }
 

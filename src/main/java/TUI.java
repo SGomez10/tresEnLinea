@@ -55,11 +55,31 @@ public class TUI extends Main {
         return sc.next();
     }
 
+    public int guardarMidaTaullel(){
+        System.out.println("Escriu la mida del taulell (minim 3, maxim 10)");
+        return Integer.parseInt(sc.next());
+    }
+
+    public void guardarMidaError(){
+        System.out.println("El número no entra en el rang definit");
+    }
+
+    public void guardarMidaOK(){
+        System.out.println("S'ha guardat la mida del taulell correctament");
+    }
+
     public int carregarPartidaTorn(File file) throws FileNotFoundException {
         Scanner fr = new Scanner(file);
         int torn = Integer.parseInt(fr.next());
         fr.close();
         return torn;
+    }
+
+    public int carregarMida() throws FileNotFoundException {
+        Scanner fr = new Scanner(new File("resources/config.txt"));
+        int numMida = Integer.parseInt(fr.next());
+        fr.close();
+        return numMida;
     }
 
     public char[][] carregarPartidaTaulell(File file) throws FileNotFoundException {
