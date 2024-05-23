@@ -125,4 +125,12 @@ public class TUI extends Main {
     public TUI(Scanner sc) {
         this.sc = sc;
     }
+
+    public void ResourcesCreat(File resources) {
+        System.out.println("Directori creat: " + resources.getName());
+    }
+
+    public void SaveCreat(File savedgames) {
+        System.out.println("Directori creat: " + savedgames.getName());
+    }
 }

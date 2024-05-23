@@ -9,18 +9,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
+        TUI tui = new TUI(sc);
+        Joc joc = new Joc();
 
         File resources = new File("resources");
         if (resources.mkdir()) {
-            System.out.println("Directori creat: " + resources.getName());
+            tui.ResourcesCreat(resources);
         }
         File savedgames = new File("resources/savedgames");
         if (savedgames.mkdir()) {
-            System.out.println("Directori creat: " + savedgames.getName());
+            tui.SaveCreat(savedgames);
         }
 
-        TUI tui = new TUI(sc);
-        Joc joc = new Joc();
         boolean partida = false;
 
         while (!partida){
